@@ -17,9 +17,8 @@ const authConfig = {
       try {
         const existingGuest = await getGuest(user.email);
 
-        if (!existingGuest) {
+        if (!existingGuest)
           await createGuest({ email: user.email, fullName: user.name });
-        }
 
         return true;
       } catch {
@@ -28,7 +27,7 @@ const authConfig = {
     },
     async session({ session, user }) {
       const guest = await getGuest(session.user.email);
-      session.user.guestId = guest.guestId;
+      session.user.guestId = guest.id;
       return session;
     },
   },
